@@ -9,12 +9,17 @@ def total_variation_loss(img):
 
 
 
-def gram_matrix(input):
-    a,b,c,d = input.size()
-    features = input.view(a*b,c*d)
-    G = torch.mm(features, features.t())
-    G = G.div(a*b*c*d)
-    return G
+def gram_matrix(inputDict):
+    GramMatrix ={}
+    for key in inputDict.keys():
+        input = inputDict[key]
+        a,b,c,d = input.size()
+        features = input.view(a,b,c*d)
+        features_t = features.transpose(1,2) 
+        G = torch.bmm(features, features_t)
+        G = G.div(a*b*c*d)
+        GramMatrix[key] = G
+    return GramMatrix
 
 def gram_matrix1(input):
     a,b,c,d = input.size()

@@ -12,11 +12,12 @@ class VGGModule(nn.Module):
         self.relu4_3 =  vgg.features[0:24]
 
     def forward(self,X):
-        relu1_2 = self.relu1_2(X)
-        relu2_2 = self.relu2_2(X)
-        relu3_3 = self.relu3_3(X)
-        relu4_4 = self.relu4_3(X)
-        return relu1_2, relu2_2, relu3_3, relu4_4
+        output ={}
+        output['relu1_2'] = self.relu1_2(X)
+        output['relu2_2'] = self.relu2_2(X)
+        output['relu3_3'] = self.relu3_3(X)
+        output['relu4_4'] = self.relu4_3(X)
+        return output 
 
 class VGGModule19(nn.Module):
     def __init__(self):

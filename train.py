@@ -7,65 +7,68 @@ import numpy as np
 import argparse
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
-import torchvision.transforms as transforms
-import random
 import torch.optim as optim
-import time
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 import torchvision.models as models
-from skimage.transform import SimilarityTransform
-from skimage.transform import warp
-import copy
-from skimage.transform import resize
 import albumentations as A
 import albumentations.augmentations.functional as F
 from albumentations.pytorch import ToTensorV2
-from utils import *
-from htmlutils import *
 from collections import OrderedDict
+from models.StyleTransferModels import *
+from models.vggmodule import *
+from utils.trainingLoop import *
+from utils.utils import *
+from utils.getstyle import *
 
 dtype = torch.float32
 cpu = torch.device('cuda')
 
 
 def main(lr1,wd,epochs,styleIndicator,alpha,alphatv,batchSize,onlyTest):
-    
-
+    scratch    ='./'
+    fileRoot ='./data/'
+ 
     train_transform = A.Compose([A.Resize(256,256),
                                  A.Normalize(mean=[0.485,0.456,0.406],std=[0.229,0.224,0.225]),
                                  ToTensorV2(),
                                 ])
+    SampleTransform = A.Compose([
+                                 A.Normalize(mean=[0.485,0.456,0.406],std=[0.229,0.224,0.225]),
+                                 ToTensorV2(),
+                                ])
     if(onlyTest==0):
-        TrainingSet = NoiseDatsetLoader(csv_file='TrainingDataSet.csv', root_dir='train2014',transform=train_transform)
+        TrainingSet = DatsetLoader(csv_file=fileRoot+'TrainingDataSet.csv', root_dir=fileRoot+'/train2014',transform=train_transform)
   
         ## DataLoader 
         batch_size=batchSize
 
         dataloader_train  = DataLoader(TrainingSet,batch_size=batch_size,num_workers=4)
 
-        directoryName = 'style'+str(styleIndicator)+'alpha'+str(alpha)+'alphatv'+str(alphatv)+'batchSize'+str(batchSize)+'lr'+str(lr1)
+        directoryName = scratch+'style'+str(styleIndicator)+'/alpha'+str(alpha)+'/alphatv'+str(alphatv)+'/batchSize'+str(batchSize)+'/lr'+str(lr1)
         if not os.path.exists(directoryName):
             os.makedirs(directoryName)
 
         webpage = HTML(directoryName, 'lr = %s, alpha = %s,alphatv =%s, style = %s' % (str(lr1), str(alpha),str(alphatv), str(styleIndicator)))
 
         ## ************* Start of your Code *********************** ##
-        model = ModelStyle()
+        model = ModelStyleInstance()
         styleImage = getStyleImage(styleIndicator)
 
         optimizer = optim.Adam(model.parameters(), lr=lr1)
         ## ************ End of your code ********************   ##
 
+        vggmodel = VGGModule()
         ## Train Your Model. Complete the implementation of trainingLoop function above 
-        trainingLoop(dataloader_train, styleImage, model,optimizer,epochs,alpha,alphatv,directoryName,webpage)
+        trainingLoop(dataloader_train, styleImage, model,optimizer,epochs,alpha,alphatv,directoryName,webpage,SampleTransform,batchSize,vggmodel)
 
     train_transform = A.Compose([
                                  A.Normalize(mean=[0.485,0.456,0.406],std=[0.229,0.224,0.225]),
                                  ToTensorV2(),
                                 ])
-    model = ModelStyle()
+
+    ## Inference for network saved in the last batch
+    model = ModelStyleInstance()
     saved_state_dict = torch.load(directoryName+'/best_model_batch.pt')    
     model.load_state_dict(saved_state_dict, strict=True)
     model = model.to("cuda")
@@ -101,7 +104,7 @@ if __name__ == "__main__":
     parser.add_argument('-style', type=int,action="store", dest='style', default=0)
     parser.add_argument('-alpha', type=float,action="store", dest='alpha', default=10)
     parser.add_argument('-alphatv', type=float,action="store", dest='alphatv', default=1)
-    parser.add_argument('-batch', type=int,action="store", dest='batch', default=2)
+    parser.add_argument('-batch', type=int,action="store", dest='batch', default=8)
     parser.add_argument('-t', type=int,action="store", dest='t', default=0)
     args = parser.parse_args()
 
