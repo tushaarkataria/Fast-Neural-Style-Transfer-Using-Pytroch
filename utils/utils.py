@@ -9,6 +9,7 @@ import albumentations as A
 import albumentations.augmentations.functional as F
 from albumentations.pytorch import ToTensorV2
 import numpy as np
+from skimage import color
 
 class DatsetLoader(Dataset):
     def __init__(self, csv_file='TrainingDataSet.csv', root_dir='train2014', transform=None):

@@ -26,8 +26,8 @@ cpu = torch.device('cuda')
 
 
 def main(lr1,wd,epochs,styleIndicator,alpha,alphatv,batchSize,onlyTest):
-    scratch    ='./'
-    fileRoot ='./data/'
+    scratch    ='/scratch/general/nfs1/u1319435/StyleTransfer/'
+    fileRoot ='/scratch/general/nfs1/u1319435/StyleTransfer/'
  
     train_transform = A.Compose([A.Resize(256,256),
                                  A.Normalize(mean=[0.485,0.456,0.406],std=[0.229,0.224,0.225]),
@@ -38,7 +38,7 @@ def main(lr1,wd,epochs,styleIndicator,alpha,alphatv,batchSize,onlyTest):
                                  ToTensorV2(),
                                 ])
     if(onlyTest==0):
-        TrainingSet = DatsetLoader(csv_file=fileRoot+'TrainingDataSet.csv', root_dir=fileRoot+'/train2014',transform=train_transform)
+        TrainingSet = DatsetLoader(csv_file='./data/TrainingDataSet.csv', root_dir=fileRoot+'/train2014',transform=train_transform)
   
         ## DataLoader 
         batch_size=batchSize
@@ -73,7 +73,7 @@ def main(lr1,wd,epochs,styleIndicator,alpha,alphatv,batchSize,onlyTest):
     model.load_state_dict(saved_state_dict, strict=True)
     model = model.to("cuda")
     model.eval()
-    contentImage = io.imread('chicago.jpg')  
+    contentImage = io.imread('sampleImages/chicago.jpg')  
     contentImage = contentImage/np.max(contentImage) 
     contentImage = train_transform(image=contentImage)
     contentImage = contentImage['image'] 
@@ -84,7 +84,7 @@ def main(lr1,wd,epochs,styleIndicator,alpha,alphatv,batchSize,onlyTest):
     output = output.permute(1,2,0)
     output = output.squeeze().detach().cpu().numpy()
     io.imsave(directoryName+'/Chicago_output.png',output)
-    contentImage = io.imread('hoovertowernight.jpg')  
+    contentImage = io.imread('sampleImages/hoovertowernight.jpg')  
     contentImage = contentImage/np.max(contentImage) 
     contentImage = train_transform(image=contentImage)
     contentImage = contentImage['image'] 
@@ -104,7 +104,7 @@ if __name__ == "__main__":
     parser.add_argument('-style', type=int,action="store", dest='style', default=0)
     parser.add_argument('-alpha', type=float,action="store", dest='alpha', default=10)
     parser.add_argument('-alphatv', type=float,action="store", dest='alphatv', default=1)
-    parser.add_argument('-batch', type=int,action="store", dest='batch', default=8)
+    parser.add_argument('-batch', type=int,action="store", dest='batch', default=3)
     parser.add_argument('-t', type=int,action="store", dest='t', default=0)
     args = parser.parse_args()
 

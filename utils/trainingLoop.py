@@ -5,7 +5,9 @@ import albumentations.augmentations.functional as F
 from albumentations.pytorch import ToTensorV2
 from .loss_computation import *
 from .htmlutils import *
-
+from collections import OrderedDict
+from skimage import io
+import copy
 dtype = torch.float32
 cpu = torch.device('cuda')
 
@@ -76,9 +78,9 @@ def trainingLoop(loader, styleImage,model,optimizer,nepochs,alpha,alphatv,direct
                 best_model = copy.deepcopy(model.state_dict())
                 torch.save(best_model,directoryName+'/best_model_batch'+str(k)+'.pt')
                 print("Full loss: ",loss.item())
-                contentImage = io.imread('chicago.jpg')  
+                contentImage = io.imread('sampleImages/chicago.jpg')  
                 contentImage = contentImage/np.max(contentImage) 
-                contentImage = train_transform(image=contentImage)
+                contentImage = SampleTransform(image=contentImage)
                 contentImage = contentImage['image'] 
                 contentImage = contentImage.unsqueeze(0) 
                 contentImage = contentImage.to('cuda')
@@ -87,9 +89,9 @@ def trainingLoop(loader, styleImage,model,optimizer,nepochs,alpha,alphatv,direct
                 output = output.permute(1,2,0)
                 output = output.squeeze().detach().cpu().numpy()
                 io.imsave(directoryName+'/images/Chicago_output'+str(k)+'.png',output)
-                contentImage = io.imread('hoovertowernight.jpg')  
+                contentImage = io.imread('sampleImages/hoovertowernight.jpg')  
                 contentImage = contentImage/np.max(contentImage) 
-                contentImage = train_transform(image=contentImage)
+                contentImage = SampleTransform(image=contentImage)
                 contentImage = contentImage['image'] 
                 contentImage = contentImage.unsqueeze(0) 
                 contentImage = contentImage.to('cuda')
