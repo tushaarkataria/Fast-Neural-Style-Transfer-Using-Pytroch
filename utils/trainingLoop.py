@@ -24,12 +24,13 @@ def trainingLoop(loader, styleImage,model,optimizer,nepochs,alpha,alphatv,direct
     C, H, W    = styleImage.size()
     styleImage = styleImage.unsqueeze(0)
     
-    styleImage = styleImage.expand([batchSize,C,H,W]) ## batchSize * Channels * height * width
+    #styleImage = styleImage.expand([batchSize,C,H,W]) ## batchSize * Channels * height * width
+    styleImage = styleImage.expand([1,C,H,W]) ## batchSize * Channels * height * width
     styleImage = styleImage.to(device=cpu,dtype=dtype)
     
     ## Style Image Activations and Gram Matrix
     styleActivations = vggmodel(styleImage)
-    StyleGramMatrix  = gram_matrix(styleActivations)
+    StyleGramMatrix  = gram_matrix_1(styleActivations)
 
     ## MSE loss and weights for different losses
     contentLoss = nn.MSELoss()
@@ -42,7 +43,7 @@ def trainingLoop(loader, styleImage,model,optimizer,nepochs,alpha,alphatv,direct
         for temp in loader:
             ## Sending data to GPU
             temp = temp.to(device=cpu,dtype=dtype)
-            
+             
             ## Setting model and optimizer for training
             optimizer.zero_grad(set_to_none=True)
             model = model.to(device=cpu)    
@@ -56,7 +57,7 @@ def trainingLoop(loader, styleImage,model,optimizer,nepochs,alpha,alphatv,direct
             inputActivations = vggmodel(temp)
    
             ## Gram Matrix of the output batch 
-            outputGramMatrix = gram_matrix(outputActivations) 
+            outputGramMatrix = gram_matrix_1(outputActivations) 
             
             style_loss = 0           
             for keys in outputGramMatrix.keys():
@@ -67,10 +68,10 @@ def trainingLoop(loader, styleImage,model,optimizer,nepochs,alpha,alphatv,direct
             content_loss = contentLoss(inputActivations['relu2_2'], outputActivations['relu2_2'])
 
             tvloss       =  total_variation_loss(output)
-            loss   = content_loss + alpha*style_loss +  alphatv * tvloss 
+            loss   = content_loss + alpha*style_loss #+  alphatv * tvloss 
             loss.backward(retain_graph=True)
             optimizer.step()
-            if(k%100==0 and k>0):
+            if(k%350==0 and k>0):
                 contentLossArray.append(content_loss.item())
                 styleLossArray.append(style_loss.item())
                 fullLossArray.append(loss.item())

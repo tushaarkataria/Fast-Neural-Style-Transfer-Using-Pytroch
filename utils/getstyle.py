@@ -16,7 +16,7 @@ def getStyleImage(index):
         styleImage   = io.imread('styles/wave.jpg')
         styleImage   = styleImage/np.max(styleImage) 
     elif(index==4):
-        styleImage   = io.imread('styles/mosiac.jpg')
+        styleImage   = io.imread('styles/mosaic.jpg')
         styleImage   = styleImage/np.max(styleImage) 
     elif(index==5):
         styleImage   = io.imread('styles/la_muse.jpg')
