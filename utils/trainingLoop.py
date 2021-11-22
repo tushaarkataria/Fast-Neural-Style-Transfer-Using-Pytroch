@@ -3,6 +3,7 @@ import torch.nn as nn
 import albumentations as A
 import albumentations.augmentations.functional as F
 from albumentations.pytorch import ToTensorV2
+import matplotlib.pyplot as plt
 from .loss_computation import *
 from .htmlutils import *
 from collections import OrderedDict
@@ -12,13 +13,13 @@ dtype = torch.float32
 cpu = torch.device('cuda')
 
 
-def trainingLoop(loader, styleImage,model,optimizer,nepochs,alpha,alphatv,directoryName,webpage,SampleTransform, batchSize,vggmodel):
+def trainingLoop(loader, styleImage,model,optimizer,nepochs,alpha,alphatv,directoryName,webpage,train_transform,SampleTransform, batchSize,vggmodel):
     ## VGG model to GPU
     vggmodel = vggmodel.to(device=cpu,dtype=dtype)
     vggmodel.eval()
 
     # Style Image Gram Matrix Precalculations
-    styleImage = styleImage/np.max(styleImage) 
+    #styleImage = styleImage 
     styleImage = SampleTransform(image=styleImage)
     styleImage = styleImage['image'] 
     C, H, W    = styleImage.size()
@@ -63,15 +64,15 @@ def trainingLoop(loader, styleImage,model,optimizer,nepochs,alpha,alphatv,direct
             for keys in outputGramMatrix.keys():
                 outputGramMatrix[keys] = outputGramMatrix[keys].to(device=cpu,dtype=dtype)
                 StyleGramMatrix[keys]  = StyleGramMatrix[keys].to(device=cpu,dtype=dtype)
-                style_loss += torch.norm(outputGramMatrix[keys]-StyleGramMatrix[keys],p='fro')**2 
+                style_loss += contentLoss(outputGramMatrix[keys],StyleGramMatrix[keys])
             
             content_loss = contentLoss(inputActivations['relu2_2'], outputActivations['relu2_2'])
 
             tvloss       =  total_variation_loss(output)
-            loss   = content_loss + alpha*style_loss #+  alphatv * tvloss 
+            loss   = alphatv *content_loss + alpha*style_loss #+  alphatv * tvloss 
             loss.backward(retain_graph=True)
             optimizer.step()
-            if(k%350==0 and k>0):
+            if(k%250==0 and k>0):
                 contentLossArray.append(content_loss.item())
                 styleLossArray.append(style_loss.item())
                 fullLossArray.append(loss.item())

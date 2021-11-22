@@ -25,7 +25,7 @@ class DatsetLoader(Dataset):
             idx = idx.tolist()
         ref_img_name = os.path.join(self.root_dir,self.name_csv.iloc[idx, 0])
         ref_image    = io.imread(ref_img_name)
-        ref_image    = ref_image/np.max(ref_image)
+        ref_image    = ref_image
         if(len(ref_image.shape)==2):
             ref_image = color.gray2rgb(ref_image)  
         ref_image = self.transform(image=ref_image)
