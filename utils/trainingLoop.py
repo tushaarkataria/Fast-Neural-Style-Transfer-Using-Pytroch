@@ -81,7 +81,7 @@ def trainingLoop(loader, styleImage,model,optimizer,nepochs,alpha,alphatv,direct
                 torch.save(best_model,directoryName+'/best_model_batch'+str(k)+'.pt')
                 print("Full loss: ",loss.item())
                 contentImage = io.imread('sampleImages/chicago.jpg')  
-                contentImage = contentImage/np.max(contentImage) 
+                contentImage = contentImage 
                 contentImage = SampleTransform(image=contentImage)
                 contentImage = contentImage['image'] 
                 contentImage = contentImage.unsqueeze(0) 
@@ -92,7 +92,7 @@ def trainingLoop(loader, styleImage,model,optimizer,nepochs,alpha,alphatv,direct
                 output = output.squeeze().detach().cpu().numpy()
                 io.imsave(directoryName+'/images/Chicago_output'+str(k)+'.png',output)
                 contentImage = io.imread('sampleImages/hoovertowernight.jpg')  
-                contentImage = contentImage/np.max(contentImage) 
+                contentImage = contentImage 
                 contentImage = SampleTransform(image=contentImage)
                 contentImage = contentImage['image'] 
                 contentImage = contentImage.unsqueeze(0) 

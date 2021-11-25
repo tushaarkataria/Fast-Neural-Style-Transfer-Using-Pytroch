@@ -3,10 +3,11 @@ import torch.nn as nn
 import torchvision.models as models
 
 class VGGModule(nn.Module):
-    def __init__(self):
+    def __init__(self,load=False):
         super(VGGModule,self).__init__()
         vgg = models.vgg16(pretrained=True)
-        vgg.load_state_dict(torch.load('./models/vgg16-00b39a1b.pth'), strict=False)
+        if(load==True):
+            vgg.load_state_dict(torch.load('./models/vgg16-00b39a1b.pth'), strict=False)
         self.relu1_2 =  vgg.features[0:4]
         self.relu2_2 =  vgg.features[0:9]
         self.relu3_3 =  vgg.features[0:16]

@@ -31,22 +31,13 @@ def main(lr1,wd,epochs,styleIndicator,alpha,alphatv,batchSize,onlyTest,norm):
     scratch    =''
     fileRoot   ='./data/'
  
-    #train_transform = A.Compose([A.Resize(256,256),
-    #                             A.CenterCrop(256,256),
-    #                             A.Normalize(mean=[103.939, 116.779, 123.68],std=[1,1,1], max_pixel_value=1.0),
-    #                             ToTensorV2(),
-    #                            ])
-    #SampleTransform = A.Compose([
-    #                             A.Normalize(mean=[103.939, 116.779, 123.68],std=[1,1,1], max_pixel_value=1.0),
-    #                             ToTensorV2(),
-    #                            ])
     train_transform = A.Compose([A.Resize(256,256),
                                  A.CenterCrop(256,256),
-                                 A.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229,0.224,0.225]),
+                                 A.Normalize(mean=[103.939, 116.779, 123.68],std=[1,1,1], max_pixel_value=1.0),
                                  ToTensorV2(),
                                 ])
     SampleTransform = A.Compose([
-                                 A.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229,0.224,0.225]),
+                                 A.Normalize(mean=[103.939, 116.779, 123.68],std=[1,1,1], max_pixel_value=1.0),
                                  ToTensorV2(),
                                 ])
     if(onlyTest==0):
@@ -65,7 +56,7 @@ def main(lr1,wd,epochs,styleIndicator,alpha,alphatv,batchSize,onlyTest,norm):
 
         ## ************* Start of your Code *********************** ##
         if(norm==0):
-            model = ModelStyleInstance()
+            model = ModelStyleInstance(load=True)
         else:
             model = ModelStyleBatch()
         styleImage = getStyleImage(styleIndicator)
@@ -77,10 +68,10 @@ def main(lr1,wd,epochs,styleIndicator,alpha,alphatv,batchSize,onlyTest,norm):
         ## Train Your Model. Complete the implementation of trainingLoop function above 
         trainingLoop(dataloader_train, styleImage, model,optimizer,epochs,alpha,alphatv,directoryName,webpage,train_transform,SampleTransform,batchSize,vggmodel)
 
-    #SampleTransform = A.Compose([
-    #                             A.Normalize(mean=[103.939, 116.779, 123.68],std=[1,1,1], max_pixel_value=1.0),
-    #                             ToTensorV2(),
-    #                            ])
+    SampleTransform = A.Compose([
+                                 A.Normalize(mean=[103.939, 116.779, 123.68],std=[1,1,1], max_pixel_value=1.0),
+                                 ToTensorV2(),
+                                ])
     SampleTransform = A.Compose([
                                  A.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229,0.224,0.225]),
                                  ToTensorV2(),

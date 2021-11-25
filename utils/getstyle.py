@@ -24,5 +24,8 @@ def getStyleImage(index):
     elif(index==6):
         styleImage   = io.imread('styles/candy.jpg')
         #styleImage   = styleImage/np.max(styleImage) 
+    elif(index==7):
+        styleImage   = io.imread('styles/composition_vii.jpg')
+        #styleImage   = styleImage/np.max(styleImage) 
     return styleImage
 
