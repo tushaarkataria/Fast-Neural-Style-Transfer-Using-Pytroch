@@ -102,9 +102,42 @@ def trainingLoop(loader, styleImage,model,optimizer,nepochs,alpha,alphatv,direct
                 output = output.permute(1,2,0)
                 output = output.squeeze().detach().cpu().numpy()
                 io.imsave(directoryName+'/images/hoovertower_output'+str(k)+'.png',output)
+                contentImage = io.imread('sampleImages/MyImage.png')  
+                contentImage = contentImage 
+                contentImage = SampleTransform(image=contentImage)
+                contentImage = contentImage['image'] 
+                contentImage = contentImage.unsqueeze(0) 
+                contentImage = contentImage.to('cuda')
+                output = model(contentImage)
+                output = output.squeeze()
+                output = output.permute(1,2,0)
+                output = output.squeeze().detach().cpu().numpy()
+                io.imsave(directoryName+'/images/MyImage'+str(k)+'.png',output)
+                contentImage = io.imread('sampleImages/spring-block-u.jpg')  
+                contentImage = contentImage 
+                contentImage = SampleTransform(image=contentImage)
+                contentImage = contentImage['image'] 
+                contentImage = contentImage.unsqueeze(0) 
+                contentImage = contentImage.to('cuda')
+                output = model(contentImage)
+                output = output.squeeze()
+                output = output.permute(1,2,0)
+                output = output.squeeze().detach().cpu().numpy()
+                io.imsave(directoryName+'/images/SpringBlock'+str(k)+'.png',output)
+                contentImage = io.imread('sampleImages/univeristy-utah.jpg')  
+                contentImage = contentImage 
+                contentImage = SampleTransform(image=contentImage)
+                contentImage = contentImage['image'] 
+                contentImage = contentImage.unsqueeze(0) 
+                contentImage = contentImage.to('cuda')
+                output = model(contentImage)
+                output = output.squeeze()
+                output = output.permute(1,2,0)
+                output = output.squeeze().detach().cpu().numpy()
+                io.imsave(directoryName+'/images/univeristy-utah'+str(k)+'.png',output)
                 ## Writing to Webpage
                 visuals = OrderedDict()
-                visuals={'chicago'+str(k):'Chicago_output'+str(k)+'.png','hoover'+str(k):'hoovertower_output'+str(k)+'.png'}
+                visuals={'chicago'+str(k):'Chicago_output'+str(k)+'.png','hoover'+str(k):'hoovertower_output'+str(k)+'.png','MyImage'+str(k):'MyImage'+str(k)+'.png','Spring'+str(k):'SpringBlock'+str(k)+'.png','University'+str(k):'univeristy-utah'+str(k)+'.png'}
                 save_images(webpage, visuals, directoryName+'/images', aspect_ratio=1,width=512)
                 webpage.save()
             k=k+1
