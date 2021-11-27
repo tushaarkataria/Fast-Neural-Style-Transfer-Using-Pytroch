@@ -14,7 +14,7 @@ Was able to create similar results with Pretrained Network provided with Pytorch
 
 1. Style 1
 
-![](styles/starry_night.jpg =300x300)
+![](styles/starry_night.jpg){:height="400px" width="400px"}
 
 2. Style 2
 
