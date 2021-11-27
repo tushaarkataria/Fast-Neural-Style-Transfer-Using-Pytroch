@@ -12,17 +12,43 @@ Was able to create similar results with Pretrained Network provided with Pytorch
 
 ## Styles used for experiments
 
-1. Style 1
+1. Style 0
 
-![](styles/starry_night.jpg){:height="400px" width="400px"}
+![](styles/starry_night.jpg)
 
-2. Style 2
-
-![](styles/the_scream.jpg)
-
-3. Style 3
+2. Style 1
 
 ![](styles/the_scream.jpg)
 
+3. Style 2
 
+![](styles/udnie.jpg)
+
+4. Style 3
+
+![](styles/wave.jpg)
+5. Style 4
+
+![](styles/mosiac.jpg)
+6. Style 5
+
+![](styles/la_muse.jpg)
+7. Style 6
+
+![](styles/candy.jpg)
+8. Style 7
+
+![](styles/composition_vii.jpg)
+
+9. Style 8
+
+![](styles/SampleStyle-2.jpg)
+
+10. Style 9
+
+![](styles/SampleStyle-1.jpg)
+
+11. Style 10
+
+![](styles/SampleStyle-4.jpg)
 
