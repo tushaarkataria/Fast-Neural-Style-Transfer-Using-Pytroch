@@ -9,6 +9,7 @@ Learning Rate = 0.001
 <img src='files/style4/SpringBlock.png' height='225px'>
 <img src='files/style4/university-utah.png' height='225px'>
 </div>
+
 ## Alpha = 1, AlphaTv= 300000
 <div align='center'>
 <img src='files/style4/Chicago_output-1.png' height='225px'>
@@ -16,6 +17,7 @@ Learning Rate = 0.001
 <img src='files/style4/SpringBlock-1.png' height='225px'>
 <img src='files/style4/university-utah-1.png' height='225px'>
 </div>
+
 ## Alpha = 1, AlphaTv= 400000
 <div align='center'>
 <img src='files/style4/Chicago_output-1.png' height='225px'>
