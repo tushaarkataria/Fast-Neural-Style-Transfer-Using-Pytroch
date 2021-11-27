@@ -8,6 +8,21 @@ Was able to replicate results shown in the paper below with pretrained VGG model
 
 Was able to create similar results with Pretrained Network provided with Pytorch Pretrained model, with different hyper parameters.
 
+## Python Prerequisites
+
+- python3.6 >
+- pytorch with cuda enabled.
+- cuda 10.2 version
+- skimage
+- dominate
+- copy 
+
+
+## Usage
+
+
+
+
 1. It will proabably work with other Networks as well like ResNet, might be interesting to see those results.
 
 ## Styles used for experiments
