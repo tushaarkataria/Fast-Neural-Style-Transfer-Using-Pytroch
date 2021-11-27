@@ -14,7 +14,7 @@ Was able to create similar results with Pretrained Network provided with Pytorch
 
 1. Style 0
 
-![,200x200](styles/starry_night.jpg)
+<img src='styles/starry_night.jpg' height='225px'>
 
 2. Style 1
 
