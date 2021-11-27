@@ -14,7 +14,7 @@ Was able to create similar results with Pretrained Network provided with Pytorch
 
 1. Style 0
 
-![20%](styles/starry_night.jpg)
+![,20%](styles/starry_night.jpg)
 
 2. Style 1
 
