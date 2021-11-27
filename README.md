@@ -28,7 +28,7 @@ Was able to create similar results with Pretrained Network provided with Pytorch
 <img src='styles/wave.jpg' height='225px'>
 
 5. Style 4
-<img src='styles/mosiac.jpg' height='225px'>
+<img src='styles/mosaic.jpg' height='225px'>
 
 6. Style 5
 <img src='styles/la_muse.jpg' height='225px'>
