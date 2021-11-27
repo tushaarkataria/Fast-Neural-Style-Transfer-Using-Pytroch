@@ -18,37 +18,33 @@ Was able to create similar results with Pretrained Network provided with Pytorch
 
 2. Style 1
 
-![](styles/the_scream.jpg)
+<img src='styles/the_scream.jpg' height='225px'>
 
 3. Style 2
 
-![](styles/udnie.jpg)
+<img src='styles/udnie.jpg' height='225px'>
 
 4. Style 3
+<img src='styles/wave.jpg' height='225px'>
 
-![](styles/wave.jpg)
 5. Style 4
+<img src='styles/mosiac.jpg' height='225px'>
 
-![](styles/mosiac.jpg)
 6. Style 5
+<img src='styles/la_muse.jpg' height='225px'>
 
-![](styles/la_muse.jpg)
 7. Style 6
+<img src='styles/candy.jpg' height='225px'>
 
-![](styles/candy.jpg)
 8. Style 7
-
-![](styles/composition_vii.jpg)
+<img src='styles/composition_vii.jpg' height='225px'>
 
 9. Style 8
-
-![](styles/SampleStyle-2.jpg)
+<img src='styles/SampleStyle-2.jpg' height='225px'>
 
 10. Style 9
-
-![](styles/SampleStyle-1.jpg)
+<img src='styles/SampleStyle-1.jpg' height='225px'>
 
 11. Style 10
-
-![](styles/SampleStyle-4.jpg)
+<img src='styles/SampleStyle-4.jpg' height='225px'>
 
