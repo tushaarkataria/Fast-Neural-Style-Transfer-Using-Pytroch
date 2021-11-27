@@ -42,7 +42,7 @@ Was able to create similar results with Pretrained Network provided with Pytorch
 4. Style 3
 <img src='styles/wave.jpg' height='225px'>
 
-5. Style 4
+5. Style 4 [Sample Outputs for the Style](results/style4.md)
 <img src='styles/mosaic.jpg' height='225px'>
 
 6. Style 5
