@@ -27,7 +27,7 @@ Was able to create similar results with Pretrained Network provided with Pytorch
 
 ## Styles used for experiments
 
-1. Style 0
+1. Style 0 [Sample Outputs for the Style][results/style0.md]
 
 <img src='styles/starry_night.jpg' height='225px'>
 
