@@ -20,6 +20,8 @@ Was able to create similar results with Pretrained Network provided with Pytorch
 
 ## Usage
 
+[Dataset](https://cocodataset.org/#download)
+
 ### Training
 
 ```bash
@@ -39,6 +41,8 @@ python test.py -style 5 -imageName <imagename>
 ## Some Issues
 
 1. Dynamic range of outputs is more than inputs, some way to normalize that would make the outputs better.
+
+2. Can we use low number of images from COCO dataset and get results, so that this can be given as an assignment ??
 
 
 ## Styles used for experiments
