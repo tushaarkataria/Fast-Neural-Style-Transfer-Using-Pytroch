@@ -25,6 +25,7 @@ Learning Rate = 0.001
 <img src='files/style4/SpringBlock-2.png' height='225px'>
 <img src='files/style4/university-utah-2.png' height='225px'>
 </div>
+
 ## Alphatv = 2, Alpha= 500000
 <div align='center'>
 <img src='files/style4/Chicago_output-3.png' height='225px'>
