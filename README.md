@@ -20,10 +20,26 @@ Was able to create similar results with Pretrained Network provided with Pytorch
 
 ## Usage
 
+### Training
+
+```bash
+python train.py -lr 0.001 -epoch 2 -batch 6 -style 5 -alphatv 1 -alpha 200000
+```
+
+Above example is for style 5. More can be used.
+
+### Testing/ Running on your own images
+```bash
+python test.py -style 5 -imageName <imagename> 
+```
+
+<imagename> should contain the path to the file as well.
 
 
+## Some Issues
 
-1. It will proabably work with other Networks as well like ResNet, might be interesting to see those results.
+1. Dynamic range of outputs is more than inputs, some way to normalize that would make the outputs better.
+
 
 ## Styles used for experiments
 
@@ -62,4 +78,8 @@ Was able to create similar results with Pretrained Network provided with Pytorch
 
 11. Style 10  [Sample Outputs for the Style](results/style10.md)
 <img src='styles/SampleStyle-4.jpg' height='225px'>
+
+## Future Experiments if Possible
+
+1. It will proabably work with other Networks as well like ResNet, might be interesting to see those results.
 
