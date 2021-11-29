@@ -60,6 +60,6 @@ Was able to create similar results with Pretrained Network provided with Pytorch
 10. Style 9
 <img src='styles/SampleStyle-1.jpg' height='225px'>
 
-11. Style 10
+11. Style 10  [Sample Outputs for the Style](results/style10.md)
 <img src='styles/SampleStyle-4.jpg' height='225px'>
 
