@@ -51,13 +51,13 @@ Was able to create similar results with Pretrained Network provided with Pytorch
 7. Style 6  [Sample Outputs for the Style](results/style6.md)
 <img src='styles/candy.jpg' height='225px'>
 
-8. Style 7
+8. Style 7  [Sample Outputs for the Style](results/style7.md)
 <img src='styles/composition_vii.jpg' height='225px'>
 
-9. Style 8
+9. Style 8  [Sample Outputs for the Style](results/style8.md)
 <img src='styles/SampleStyle-2.jpg' height='225px'>
 
-10. Style 9
+10. Style 9 [Sample Outputs for the Style](results/style9.md)
 <img src='styles/SampleStyle-1.jpg' height='225px'>
 
 11. Style 10  [Sample Outputs for the Style](results/style10.md)
