@@ -48,7 +48,7 @@ Was able to create similar results with Pretrained Network provided with Pytorch
 6. Style 5  [Sample Outputs for the Style](results/style5.md)
 <img src='styles/la_muse.jpg' height='225px'>
 
-7. Style 6
+7. Style 6  [Sample Outputs for the Style](results/style6.md)
 <img src='styles/candy.jpg' height='225px'>
 
 8. Style 7
